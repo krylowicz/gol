@@ -13,6 +13,6 @@ add_subdirectory("../../lib/Cinder" "../../build")
 ci_make_app(
   APP_NAME    ${PROJECT_NAME}
   CINDER_PATH ${CINDER_PATH}
-  SOURCES     ${APP_PATH}/src/main.cc
+  SOURCES     ${APP_PATH}/src/GameOfLife.cc
   INCLUDES    ${APP_PATH}/include
 )

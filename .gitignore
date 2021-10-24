@@ -1,3 +1,6 @@
 .vscode
 build
 .DS_Store
+include/xtensor
+include/xtl
+share

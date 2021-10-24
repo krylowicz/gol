@@ -1,3 +1,9 @@
 [submodule "lib/Cinder"]
 	path = lib/Cinder
 	url = https://github.com/cinder/Cinder
+[submodule "lib/xtensor"]
+	path = lib/xtensor
+	url = https://github.com/xtensor-stack/xtensor
+[submodule "lib/xtl"]
+	path = lib/xtl
+	url = https://github.com/xtensor-stack/xtl
