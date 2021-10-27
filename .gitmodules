@@ -4,6 +4,8 @@
 [submodule "lib/xtensor"]
 	path = lib/xtensor
 	url = https://github.com/xtensor-stack/xtensor
+	ignore = untracked
 [submodule "lib/xtl"]
 	path = lib/xtl
 	url = https://github.com/xtensor-stack/xtl
+	ignore = untracked
