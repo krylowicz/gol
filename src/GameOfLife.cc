@@ -16,6 +16,7 @@ void GameOfLife::setCellActive(size_t i, size_t j) {
 void GameOfLife::setCellInactive(size_t i, size_t j) {
   state(i, j) = 1;
 }
+
 void GameOfLife::setup() {}
 
 void GameOfLife::draw() {
