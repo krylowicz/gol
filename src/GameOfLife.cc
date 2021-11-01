@@ -49,18 +49,6 @@ void GameOfLife::next() {
   }
 }
 
-void GameOfLife::keyDown(app::KeyEvent event) {
-  if (app::KeyEvent::KEY_SPACE) {
-    if (playing) {
-      setFrameRate(0.0f);
-      playing = false;  
-    } else {
-      setFrameRate(60.0f);
-      playing = true;
-    }  
-  }
-}
-
 void GameOfLife::setup() {}
 
 void GameOfLife::draw() {
