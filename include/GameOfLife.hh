@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cinder/app/App.h"
+#include "cinder/app/KeyEvent.h"
 #include "xtensor/xtensor.hpp"
 #include "xtensor/xarray.hpp"
 #include "xtensor/xrandom.hpp"
@@ -15,12 +16,16 @@ class GameOfLife : public app::App {
     xt::xarray<unsigned> state {xt::random::randint<unsigned>({rows, cols}, 0, 2)};
   
   public:
+    bool playing {true};
+
     bool isCellActive(size_t i, size_t j) const;
     void setCellActive(size_t i, size_t j);
     void setCellInactive(size_t i, size_t j);
 
     unsigned countNeighbours(size_t i, size_t j) const;
     void next();
+
+    void keyDown(app::KeyEvent event);
 
     void setup() override;
     void draw() override;
