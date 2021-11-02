@@ -5,6 +5,9 @@
 
 using namespace ci;
 
+GameOfLife::GameOfLife(const size_t res_, const size_t rows_, const size_t cols_)
+  : res {res_}, rows {rows_}, cols {cols_} {};
+
 bool GameOfLife::isCellActive(size_t i, size_t j) const {
   return state(i, j);
 }
@@ -47,21 +50,4 @@ void GameOfLife::next() {
       }
     }
   }
-}
-
-void GameOfLife::setup() {}
-
-void GameOfLife::draw() {
-  gl::clear();
-  for (size_t i = 0; i < rows; ++i) {
-    for (size_t j = 0; j < cols; ++j) {
-      if (isCellActive(i, j)) {
-        auto top {ci::vec2(i * res, j * res)};
-        auto bottom {ci::vec2((i + 1) * res - 1, (j + 1) * res - 1)};        
-
-        gl::drawSolidRect(Rectf(top, bottom));
-      }
-    }
-  }
-  next();
 }
