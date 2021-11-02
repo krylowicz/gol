@@ -1,32 +1,13 @@
 #include "cinder/app/App.h"
-#include "cinder/app/KeyEvent.h"
 #include "cinder/gl/gl.h"
 #include "cinder/app/RendererGl.h"
-
-#include "GameOfLife.hh"
-#include "GolViewer.hh"
+#include "Game.hh"
 
 using namespace ci;
 
-class Game : public app::App {
-  private:
-    const size_t res {10};
-    const size_t rows {app::getWindowWidth() / res};
-    const size_t cols {app::getWindowHeight() / res};
-
-    GameOfLife gol {res, rows, cols};
-    GolViewer viewer {};
-
-  public:
-    void setup() override;
-    void draw() override;
-
-    void keyDown(app::KeyEvent event) override { viewer.keyDown(event); }
-};
-
 void prepareSettings(Game::Settings* settings) {
   settings->setWindowSize(600, 400);
-  settings->setFrameRate(60.0f);
+  settings->setFrameRate(0.0f);
 }
 
 void Game::setup() {}
