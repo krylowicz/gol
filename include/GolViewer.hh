@@ -15,11 +15,12 @@ class GolViewer {
     GameOfLife& gol;
 
     bool drawing {false};
+    bool playing {false};
 
   public:
     GolViewer(GameOfLife& gol, Window& window);
 
-    bool playing {false};
+    bool getPlaying();
 
     bool isMouseInWindow(size_t, size_t j) const;
     std::array<size_t, 2> getCoordinates(size_t i, size_t j);

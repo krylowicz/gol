@@ -40,7 +40,7 @@ void GameOfLife::drawCell(size_t i, size_t j) const {
   }
 }
 
-void GameOfLife::next(bool& playing) {
+void GameOfLife::next(bool playing) {
   if (!playing) {
     return;
   }

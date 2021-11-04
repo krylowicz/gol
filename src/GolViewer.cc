@@ -10,15 +10,8 @@ using namespace ci;
 
 GolViewer::GolViewer(GameOfLife& gol_, Window& window_): gol {gol_}, window {window_} {}
 
-#include "cinder/Log.h"
-void GolViewer::keyDown(app::KeyEvent& event) {
-  if (event.KEY_SPACE) {
-    if (playing) {
-      playing = false;
-    } else {
-      playing = true;
-    }  
-  }
+bool GolViewer::getPlaying() {
+  return playing;
 }
 
 bool GolViewer::isMouseInWindow(size_t i, size_t j) const {
@@ -36,6 +29,16 @@ std::array<size_t, 2> GolViewer::getCoordinates(size_t i, size_t j) {
     return std::array<size_t, 2> {i, j};
   }
   return std::array<size_t, 2> {};
+}
+
+void GolViewer::keyDown(app::KeyEvent& event) {
+  if (event.KEY_SPACE) {
+    if (playing) {
+      playing = false;
+    } else {
+      playing = true;
+    }  
+  }
 }
 
 void GolViewer::mouseDown(app::MouseEvent& event) {
