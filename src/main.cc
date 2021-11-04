@@ -14,8 +14,8 @@ void Game::setup() {}
 
 void Game::draw() {
   gl::clear();
-  for (size_t i = 0; i < rows; ++i) {
-    for (size_t j = 0; j < cols; ++j) {
+  for (size_t i = 0; i < window.rows; ++i) {
+    for (size_t j = 0; j < window.cols; ++j) {
       gol.drawCell(i, j);
     }
   }

@@ -6,20 +6,18 @@
 #include "xtensor/xtensor.hpp"
 #include "xtensor/xarray.hpp"
 #include "xtensor/xrandom.hpp"
+#include "Window.hh"
 
 using namespace ci;
 
 class GameOfLife {
   private:
-    const size_t res {10};
-    const size_t rows {app::getWindowWidth() / res};
-    const size_t cols {app::getWindowHeight() / res};
-    xt::xarray<unsigned> state {xt::zeros<unsigned>({rows, cols})};
+    Window window;
+    xt::xarray<unsigned> state {xt::zeros<unsigned>({window.rows, window.cols})};
     //xt::xarray<unsigned> state {xt::random::randint<unsigned>({rows, cols}, 0, 2)};
 
   public:
-    GameOfLife(const size_t res, const size_t rows, const size_t cols);
-    GameOfLife() = default;
+    GameOfLife(Window& window);
 
     bool isCellActive(size_t i, size_t j) const;
     void setCellActive(size_t i, size_t j);

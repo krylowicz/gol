@@ -3,10 +3,11 @@
 #include "cinder/app/MouseEvent.h"
 #include "GameOfLife.hh"
 #include "GolViewer.hh"
+#include "Window.hh"
 
 using namespace ci;
 
-GolViewer::GolViewer(GameOfLife& gol_): gol {gol_} {}
+GolViewer::GolViewer(GameOfLife& gol_, Window& window_): gol {gol_}, window {window_} {}
 
 void GolViewer::keyDown(app::KeyEvent& event) {
   if (event.KEY_SPACE) {
@@ -27,8 +28,8 @@ void GolViewer::mouseDown(app::MouseEvent& event) {
     auto j {event.getY()};
 
     if (i > 0 && j > 0 && i < app::getWindowWidth() && j < app::getWindowHeight()) {
-      i = (i * 60) / app::getWindowWidth();
-      j = (j * 40) / app::getWindowHeight();
+      i = (i * window.rows) / app::getWindowWidth();
+      j = (j * window.cols) / app::getWindowHeight();
 
       gol.setCellActive(i, j);
     }
@@ -39,8 +40,8 @@ void GolViewer::mouseDown(app::MouseEvent& event) {
     auto j {event.getY()};
 
     if (i > 0 && j > 0 && i < app::getWindowWidth() && j < app::getWindowHeight()) {
-      i = (i * 60) / app::getWindowWidth();
-      j = (j * 40) / app::getWindowHeight();
+      i = (i * window.rows) / app::getWindowWidth();
+      j = (j * window.cols) / app::getWindowHeight();
 
       gol.setCellInactive(i, j);
     }
@@ -61,8 +62,8 @@ void GolViewer::mouseDrag(app::MouseEvent& event) {
       auto i {event.getX()};
       auto j {event.getY()};
 
-      i = (i * 60) / app::getWindowWidth();
-      j = (j * 40) / app::getWindowHeight();
+      i = (i * window.rows) / app::getWindowWidth();
+      j = (j * window.cols) / app::getWindowHeight();
 
       gol.setCellActive(i, j);
     }
@@ -70,8 +71,8 @@ void GolViewer::mouseDrag(app::MouseEvent& event) {
       auto i {event.getX()};
       auto j {event.getY()};
 
-      i = (i * 60) / app::getWindowWidth();
-      j = (j * 40) / app::getWindowHeight();
+      i = (i * window.rows) / app::getWindowWidth();
+      j = (j * window.cols) / app::getWindowHeight();
 
       gol.setCellInactive(i, j);
     }

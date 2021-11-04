@@ -5,17 +5,15 @@
 #include "cinder/app/MouseEvent.h"
 #include "GameOfLife.hh"
 #include "GolViewer.hh"
+#include "Window.hh"
 
 using namespace ci;
 
 class Game : public app::App {
   private:
-    const size_t res {10};
-    const size_t rows {app::getWindowWidth() / res};
-    const size_t cols {app::getWindowHeight() / res};
-
-    GameOfLife gol {res, rows, cols};
-    GolViewer viewer {gol};
+    Window window {};
+    GameOfLife gol {window};
+    GolViewer viewer {gol, window};
 
   public:
     void setup() override;
