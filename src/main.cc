@@ -19,7 +19,7 @@ void Game::draw() {
       gol.drawCell(i, j);
     }
   }
-  gol.next();
+  // gol.next();
 }
 
 CINDER_APP(Game, app::RendererGl, prepareSettings)

@@ -6,6 +6,8 @@
 #include "GameOfLife.hh"
 #include "GolViewer.hh"
 
+using namespace ci;
+
 class Game : public app::App {
   private:
     const size_t res {10};
@@ -13,7 +15,7 @@ class Game : public app::App {
     const size_t cols {app::getWindowHeight() / res};
 
     GameOfLife gol {res, rows, cols};
-    GolViewer viewer {};
+    GolViewer viewer {gol};
 
   public:
     void setup() override;

@@ -24,10 +24,7 @@ unsigned GameOfLife::countNeighbours(size_t x, size_t y) const {
   unsigned neighbours {0};
   for (int i = -1; i < 2; ++i) {
     for (int j = -1; j < 2; ++j) {
-      size_t row {(x + rows) % rows};
-      size_t col {(y + cols) % cols};
-
-      if (isCellActive(row + i, col + j)) neighbours++;
+      if (isCellActive(x + i, y + j)) neighbours++;
     }
   }
 
@@ -37,7 +34,7 @@ unsigned GameOfLife::countNeighbours(size_t x, size_t y) const {
 void GameOfLife::drawCell(size_t i, size_t j) const {
   if (isCellActive(i, j)) {
     auto top {ci::vec2(i * res, j * res)};
-    auto bottom {ci::vec2((i + 1) * res - 1, (j + 1) * res - 1)};        
+    auto bottom {ci::vec2((i + 1) * res, (j + 1) * res)};
 
     gl::drawSolidRect(Rectf(top, bottom));
   }
