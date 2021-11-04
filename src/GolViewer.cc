@@ -10,7 +10,7 @@ using namespace ci;
 
 GolViewer::GolViewer(GameOfLife& gol_, Window& window_): gol {gol_}, window {window_} {}
 
-bool GolViewer::getPlaying() {
+bool GolViewer::isPlaying() {
   return playing;
 }
 
@@ -42,24 +42,14 @@ void GolViewer::keyDown(app::KeyEvent& event) {
 }
 
 void GolViewer::mouseDown(app::MouseEvent& event) {
-  if (event.isLeft()) {
+  if (event.isLeft() || event.isRight()) {
     drawing = true;
     auto i {event.getX()};
     auto j {event.getY()};
 
     if (isMouseInWindow(i, j)) {
       auto [x, y] = getCoordinates(i, j);
-      gol.setCellActive(x, y);
-    }
-  }
-  if (event.isRight()) {
-    drawing = true;
-    auto i {event.getX()};
-    auto j {event.getY()};
-
-    if (isMouseInWindow(i, j)) {
-      auto [x, y] = getCoordinates(i, j);
-      gol.setCellInactive(x, y);
+      event.isLeft() ? gol.setCellActive(x, y)  : gol.setCellInactive(x, y);
     }
   }
 }

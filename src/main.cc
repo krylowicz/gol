@@ -7,7 +7,7 @@ using namespace ci;
 
 void prepareSettings(Game::Settings* settings) {
   settings->setWindowSize(600, 400);
-  settings->setFrameRate(60.0f);
+  settings->setFrameRate(30.0f);
 }
 
 void Game::setup() {}
@@ -19,7 +19,7 @@ void Game::draw() {
       gol.drawCell(i, j);
     }
   }
-  gol.next(viewer.getPlaying());
+  gol.next(viewer.isPlaying());
 }
 
 CINDER_APP(Game, app::RendererGl, prepareSettings)
