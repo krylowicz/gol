@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include "cinder/app/App.h"
 #include "cinder/app/KeyEvent.h"
 #include "cinder/app/MouseEvent.h"
@@ -13,11 +14,15 @@ class GolViewer {
     Window& window;
     GameOfLife& gol;
 
-    bool playing {false};
     bool drawing {false};
 
   public:
     GolViewer(GameOfLife& gol, Window& window);
+
+    bool playing {false};
+
+    bool isMouseInWindow(size_t, size_t j) const;
+    std::array<size_t, 2> getCoordinates(size_t i, size_t j);
 
     void keyDown(app::KeyEvent& event);
     void mouseDown(app::MouseEvent& event);

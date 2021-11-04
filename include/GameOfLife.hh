@@ -25,5 +25,5 @@ class GameOfLife {
     void drawCell(size_t i, size_t j) const;
 
     unsigned countNeighbours(size_t i, size_t j) const;
-    void next();
+    void next(bool& playing);
 };

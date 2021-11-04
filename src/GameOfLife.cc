@@ -40,7 +40,11 @@ void GameOfLife::drawCell(size_t i, size_t j) const {
   }
 }
 
-void GameOfLife::next() {
+void GameOfLife::next(bool& playing) {
+  if (!playing) {
+    return;
+  }
+
   for (size_t i = 0; i < window.rows; ++i) {
     for (size_t j = 0; j < window.cols; ++j) {
       auto neighbours {countNeighbours(i, j)};

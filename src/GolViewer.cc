@@ -1,3 +1,4 @@
+#include <array>
 #include "cinder/app/App.h"
 #include "cinder/app/KeyEvent.h"
 #include "cinder/app/MouseEvent.h"
@@ -9,16 +10,32 @@ using namespace ci;
 
 GolViewer::GolViewer(GameOfLife& gol_, Window& window_): gol {gol_}, window {window_} {}
 
+#include "cinder/Log.h"
 void GolViewer::keyDown(app::KeyEvent& event) {
   if (event.KEY_SPACE) {
     if (playing) {
-      app::setFrameRate(0.0f);
-      playing = false;  
+      playing = false;
     } else {
-      app::setFrameRate(60.0f);
       playing = true;
     }  
   }
+}
+
+bool GolViewer::isMouseInWindow(size_t i, size_t j) const {
+  if (i > 0 && j > 0 && i < app::getWindowWidth() && j < app::getWindowHeight()) {
+    return true;
+  }
+  return false;
+}
+
+std::array<size_t, 2> GolViewer::getCoordinates(size_t i, size_t j) {
+  if (i > 0 && j > 0 && i < app::getWindowWidth() && j < app::getWindowHeight()) {
+    i = (i * window.rows) / app::getWindowWidth();
+    j = (j * window.cols) / app::getWindowHeight();
+
+    return std::array<size_t, 2> {i, j};
+  }
+  return std::array<size_t, 2> {};
 }
 
 void GolViewer::mouseDown(app::MouseEvent& event) {
@@ -27,11 +44,9 @@ void GolViewer::mouseDown(app::MouseEvent& event) {
     auto i {event.getX()};
     auto j {event.getY()};
 
-    if (i > 0 && j > 0 && i < app::getWindowWidth() && j < app::getWindowHeight()) {
-      i = (i * window.rows) / app::getWindowWidth();
-      j = (j * window.cols) / app::getWindowHeight();
-
-      gol.setCellActive(i, j);
+    if (isMouseInWindow(i, j)) {
+      auto [x, y] = getCoordinates(i, j);
+      gol.setCellActive(x, y);
     }
   }
   if (event.isRight()) {
@@ -39,11 +54,9 @@ void GolViewer::mouseDown(app::MouseEvent& event) {
     auto i {event.getX()};
     auto j {event.getY()};
 
-    if (i > 0 && j > 0 && i < app::getWindowWidth() && j < app::getWindowHeight()) {
-      i = (i * window.rows) / app::getWindowWidth();
-      j = (j * window.cols) / app::getWindowHeight();
-
-      gol.setCellInactive(i, j);
+    if (isMouseInWindow(i, j)) {
+      auto [x, y] = getCoordinates(i, j);
+      gol.setCellInactive(x, y);
     }
   }
 }
@@ -62,19 +75,19 @@ void GolViewer::mouseDrag(app::MouseEvent& event) {
       auto i {event.getX()};
       auto j {event.getY()};
 
-      i = (i * window.rows) / app::getWindowWidth();
-      j = (j * window.cols) / app::getWindowHeight();
-
-      gol.setCellActive(i, j);
+      if (isMouseInWindow(i, j)) {
+        auto [x, y] = getCoordinates(i, j);
+        gol.setCellActive(x, y);
+      }
     }
     if (event.isRight()) {
       auto i {event.getX()};
       auto j {event.getY()};
 
-      i = (i * window.rows) / app::getWindowWidth();
-      j = (j * window.cols) / app::getWindowHeight();
-
-      gol.setCellInactive(i, j);
+      if (isMouseInWindow(i, j)) {
+        auto [x, y] = getCoordinates(i, j);
+        gol.setCellInactive(x, y);
+      }
     }
   }
 }
