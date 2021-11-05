@@ -12,7 +12,7 @@ using namespace ci;
 
 class GameOfLife {
   private:
-    Window window;
+    Window& window;
     xt::xarray<unsigned> state {xt::zeros<unsigned>({window.rows, window.cols})};
     //xt::xarray<unsigned> state {xt::random::randint<unsigned>({rows, cols}, 0, 2)};
 
@@ -20,6 +20,7 @@ class GameOfLife {
     GameOfLife(Window& window);
 
     bool isCellActive(size_t i, size_t j) const;
+    void setCell(size_t i, size_t j, unsigned isActive);
     void setCellActive(size_t i, size_t j);
     void setCellInactive(size_t i, size_t j);
     void drawCell(size_t i, size_t j) const;

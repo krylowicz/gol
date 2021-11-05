@@ -49,7 +49,7 @@ void GolViewer::mouseDown(app::MouseEvent& event) {
 
     if (isMouseInWindow(i, j)) {
       auto [x, y] = getCoordinates(i, j);
-      event.isLeft() ? gol.setCellActive(x, y)  : gol.setCellInactive(x, y);
+      gol.setCell(x, y, static_cast<unsigned>(event.isLeft()));
     }
   }
 }
@@ -63,24 +63,13 @@ void GolViewer::mouseUp(app::MouseEvent& event) {
 }
 
 void GolViewer::mouseDrag(app::MouseEvent& event) {
-  if (drawing) {
-    if (event.isLeft()) {
-      auto i {event.getX()};
-      auto j {event.getY()};
+  if (drawing && (event.isLeft() || event.isRight())) {
+    auto i {event.getX()};
+    auto j {event.getY()};
 
-      if (isMouseInWindow(i, j)) {
-        auto [x, y] = getCoordinates(i, j);
-        gol.setCellActive(x, y);
-      }
-    }
-    if (event.isRight()) {
-      auto i {event.getX()};
-      auto j {event.getY()};
-
-      if (isMouseInWindow(i, j)) {
-        auto [x, y] = getCoordinates(i, j);
-        gol.setCellInactive(x, y);
-      }
+    if (isMouseInWindow(i, j)) {
+      auto [x, y] = getCoordinates(i, j);
+      gol.setCell(x, y, static_cast<unsigned>(event.isLeft()));
     }
   }
 }

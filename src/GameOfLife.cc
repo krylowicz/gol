@@ -12,6 +12,10 @@ bool GameOfLife::isCellActive(size_t i, size_t j) const {
   return state(i, j);
 }
 
+void GameOfLife::setCell(size_t i, size_t j, unsigned isActive) {
+  state(i, j) = isActive;
+} 
+
 void GameOfLife::setCellActive(size_t i, size_t j) {
   state(i, j) = 1;
 }
